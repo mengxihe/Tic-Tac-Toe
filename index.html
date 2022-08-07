@@ -12,10 +12,24 @@
     <div class="header">
         <h1>Tic-Tac-Toe</h1>
     </div>
+
     <div class="container">
+        <form>
+            <p>
+                <label for="player-one">name of player one</label>
+                <input type="text" name="player-one" id="player-one">
+            </p>
+            <p>
+                <label for="player-two">name of player two</label>
+                <input type="text" name="player-two" id="player-two">
+            </p>
+            <input type="checkbox" id="switch" /><label for="switch">play against computer</label>
+        </form>
         <div class="board" id="board">
             
         </div>
+        <button class="start-game">Start</button>
+        <button class="restart-game">Restart</button>
     </div>
 </body>
 </html>
