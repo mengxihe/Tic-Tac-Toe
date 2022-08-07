@@ -1,7 +1,5 @@
-console.log('Hi')
-
-
 const GameBoard = (() => {
+
     let boardData = [
         [0, 0, 0],
         [0, 0, 0],
@@ -22,21 +20,11 @@ const GameBoard = (() => {
             boardDiv.appendChild(square);
         }
     }
+    //build html square divs
     buildGrid();
-    //get cells from DOM
-    const squareElements = document.querySelectorAll('.square');
-    squareElements.forEach((cell, index) => {
-        cell.addEventListener('click', ()=>{placeMarker(index)})
-    })
 
-
-    const placeMarker = (index) => {
-
-        let col = index % 3;
-        let row = (index - col) / 3;
-        boardData[row][col] = 1;
-        console.log(boardData);
-
+    return {
+        boardData,
     }
 
 })();
@@ -49,6 +37,40 @@ const Player = () => {
 
 
 const displayController = (() => {
+
+    let player = 1;
+    //get cells from DOM
+    const squareElements = document.querySelectorAll('.square');
+    squareElements.forEach((cell, index) => {
+        cell.addEventListener('click', ()=>{placeMarker(index)})
+    })
+
+
+    const placeMarker = (index) => {
+        let col = index % 3;
+        let row = (index - col) / 3;
+        if (GameBoard.boardData[row][col] == 0) {
+            GameBoard.boardData[row][col] = player;
+            player *= -1;
+            drawMarker();
+            // console.log(GameBoard.boardData);
+        }
+    }
+
+    const drawMarker = () => {
+
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++){
+                if (GameBoard.boardData[row][col] == 1){
+                    squareElements[(row*3) + col].classList.add('circle');
+                }
+                if (GameBoard.boardData[row][col] == -1){
+                    squareElements[(row*3) + col].classList.add('cross');
+                }
+            }
+        }
+        
+    }
 
 })();
 
